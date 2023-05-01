@@ -1,0 +1,68 @@
+<h2>List of Users</h2>
+<% if (!@users.empty?) && (@users_with_tools.nil? || @users_with_tools.empty?) then %>
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Surname</th>
+    <th>Action</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @users&.each do |user| %>
+    <tr>
+      <td><%= user.first_name %></td>
+      <td><%= user.sur_name %></td>
+      <td><%= link_to "Show", user %></td>
+      <td><%= link_to "Edit", edit_user_path(user) %></td>
+      <td><%= link_to "Destroy", user, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+    </tr>
+  <% end %>
+</table>
+  <% end %>
+<br>
+  <%= form_with url: users_path, method: :get do |form| %>
+    <%= form.label :query, "Search for:" %>
+    <%= form.text_field :q %>
+    <%= form.submit "Search" %>
+  <% end %>
+<br>
+<% if (!@users_with_tools.nil?) && !@users_with_tools.empty? then %>
+  <table>
+    <tr>
+      <th>User Name</th>
+      <th>Action</th>
+      <th></th>
+      <th></th>
+      <th>Tool</th>
+    </tr>
+<% end %>
+
+  <% @users_with_tools&.each do |usertool| %>
+      <% if usertool.tools.empty?  %>
+        <tr>
+        <td><%= usertool.fullname %></td>
+          <td><%= link_to "Show", usertool %></td>
+          <td><%= link_to "Edit", edit_user_path(usertool) %></td>
+          <td><%= link_to "Destroy", usertool, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+          <td></td>
+        </tr>
+      <% else %>
+        <% usertool.tools.each do |t| %>
+          <tr>
+            <td><%= usertool.fullname %></td>
+            <td><%= link_to "Show", usertool %></td>
+            <td><%= link_to "Edit", edit_user_path(usertool) %></td>
+            <td><%= link_to "Destroy", usertool, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+            <td><%= t.name %></td>
+          </tr>
+        <% end %>
+      <% end %>
+  <% end %>
+<% if (@users_with_tools != nil) then %>
+  </table>
+<% end %>
+  <br>
+  <%= link_to "New User", new_user_path %>
+
+

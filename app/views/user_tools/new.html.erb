@@ -1,0 +1,7 @@
+<h2>UserTools#new</h2>
+<%= form_with model: UserTool.new()  do |f| %>
+  <!--%= f.collection_select :provider_id, @users, :id, :name, include_blank: true %-->
+  <%= f.select :user_id, User.all.collect { |u| [ u.first_name + " " + u.sur_name, u.id ] }, include_blank: true %>
+  <%= f.select :tool_id, Tool.all.collect { |t| [ t.name,  t.id ] }, include_blank: true %>
+  <%= f.submit "SaveUserTool" %>
+<% end %>

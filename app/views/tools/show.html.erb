@@ -1,0 +1,17 @@
+<h2>Tools</h2>
+<table>
+  <tr>
+    <th>First name</th>
+    <th>Surname</th>
+    <th>Action</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td><%= @tool.name %></td>
+    <td><%= @tool.description %></td>
+    <td><%= link_to "Show", @tool %></td>
+    <td><%= link_to "Edit", edit_tool_path(@tool) %></td>
+    <td><%= link_to "Destroy", @tool, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+  </tr>
+</table>

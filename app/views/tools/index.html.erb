@@ -1,0 +1,49 @@
+<h1>Tools#index</h1>
+<p>Find me in app/views/tools/create.html.erb</p>
+<% if (!@tools.empty?) && (@tools_with_users.nil? || @tools_with_users.empty?) then %>
+<table>
+  <tr>
+    <th></th>
+    <th>Tool Name</th>
+    <th>Description</th>
+    <th>Action</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <% @tools&.each do |tool| %>
+    <tr>
+      <td><input type="checkbox" id=<%= tool&.id %> name=<%= tool&.name %> value=<%= tool&.name %>></td>
+      <td><%= tool&.name %></td>
+      <td><%= tool&.description %></td>
+      <td><%= link_to "Show", tool %></td>
+      <td><%= link_to "Edit", edit_tool_path(tool) %></td>
+      <td><%= link_to "Destroy", tool, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+    </tr>
+  <% end %>
+</table>
+  <% end %>
+  <br>
+  <%= form_with url: tools_path, method: :get do |form| %>
+    <%= form.label :query, "Search for:" %>
+    <%= form.text_field :q %>
+    <%= form.submit "Search" %>
+  <% end %>
+  <br>
+  <table>
+    <tr>
+      <th>Tool name</th>
+      <th>Description</th>
+      <th>User</th>
+      <th>Tool categories</th>
+    </tr>
+  <% @tools_with_users&.each do |tool| %>
+    <tr>
+      <td><%= tool.name %></td>
+      <td><%= tool.description %></td>
+      <td><%= tool.users.map(&:fullname).to_sentence %></td>
+      <td><%= tool.categories.map(&:name).to_sentence %></td>
+    </tr>
+  <% end %>
+  </table>
+  <br>
+  <%= link_to "New Tool", new_tool_path %>

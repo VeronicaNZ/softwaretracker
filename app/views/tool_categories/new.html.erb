@@ -1,0 +1,8 @@
+<h2>ToolCategories#new</h2>
+<p>Find me in app/views/tool_categories/new.html.erb</p>
+
+<%= form_with model: ToolCategory.new()  do |f| %>
+  <%= f.select :tool_id, Tool.all.collect { |t| [ t.name + " " + t.description, t.id ] }, include_blank: true %>
+  <%= f.select :category_id, Category.all.collect { |c| [ c.name,  c.id ] }, include_blank: true %>
+  <%= f.submit "SaveToolCategory" %>
+<% end %>

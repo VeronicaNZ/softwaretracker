@@ -1,0 +1,26 @@
+<h2>Categories#index</h2>
+<p>Find me in app/views/categories/index.html.erb</p>
+<table>
+<tr><th></th>
+  <th>Name</th>
+  <th>Tool</th>
+</tr>
+
+  <% @categories&.each do |category| %>
+    <tr>
+     <td> <input type="checkbox" id=<%= category&.id %> name=<%= category&.name %> value=<%= category&.name %>> </td>
+      <td> <%= category&.name %> </td> &emsp;
+      <td> <%= category&.description %> </td>
+    </tr>
+  <% end %>
+</table>
+  <br>
+  <%= form_with url: categories_path, method: :get do |form| %>
+    <%= form.label :query, "Search for:" %>
+    <%= form.text_field :q %>
+    <%= form.submit "Search" %>
+  <% end %>
+  <br>
+
+  <br>
+  <%= link_to "New Category", new_category_path %>

@@ -1,0 +1,40 @@
+<h2>UserTools#Index</h2>
+<p>List all users and their tools</p>
+
+<%= form_with model: UserTool do |f| %>
+  <table>
+    <tr><th></th>
+      <th>First name</th>
+      <th>Surname</th>
+      <th>Tool</th>
+
+    </tr>
+    <% @user_tool_list&.each do |usertool| %>
+      <tr>
+        <td><input type="checkbox" id=<%= usertool&.id %> name=<%= usertool&.id %> value=<%= usertool&.id %>>
+        </td>
+          <td>
+            <%= usertool.user.first_name %>
+          </td>
+        <td>
+            <%= usertool.user.sur_name %>
+        </td>
+        <td>
+            <%= usertool.tool.name %>
+        </td>
+
+      </tr>
+    <% end %>
+    </table>
+  <%= f.submit "Delete Tool" %>
+<% end %>
+
+<br>
+<%= form_with url: user_tools_path, method: :get do |form| %>
+  <%= form.label :query, "Search for:" %>
+  <%= form.text_field :q %>
+  <%= form.submit "Search" %>
+<% end %>
+<br>
+
+<%= link_to "Add User to a Tool", new_user_tool_path %>

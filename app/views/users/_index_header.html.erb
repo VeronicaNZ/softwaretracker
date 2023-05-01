@@ -1,0 +1,49 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+
+    * {box-sizing: border-box}
+    body {font-family: Arial, Helvetica, sans-serif;}
+
+    .navbar {
+        width: 50%;
+        background-color: #ADD8E6;
+        overflow: auto;
+    }
+
+    .navbar a {
+        float: left;
+        padding: 12px;
+        color: black;
+        text-decoration: none;
+        font-size: 17px;
+        width: 33.3%; /* Four links of equal widths */
+        text-align: center;
+    }
+
+    .navbar a:hover {
+        background-color: #008000;
+    }
+
+    .navbar a.active {
+        background-color: #0000FF;
+    }
+
+    @media screen and (max-width: 500px) {
+        .navbar a {
+            float: none;
+            display: block;
+            width: 100%;
+            text-align: left;
+        }
+    }
+</style>
+
+
+  <div class="navbar">
+    <td class="hover"> <%= link_to "Users", "/users" %></td>
+    <td class="box box2"> <%= link_to "Tools", "/tools" %></td>
+    <td class="box box3"> <%= link_to "Category", "/categories" %></td>
+  </div>
+
+

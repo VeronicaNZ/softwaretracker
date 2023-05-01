@@ -1,0 +1,29 @@
+<h2>ToolCategories#index</h2>
+<p>Find me in app/views/tool_categories/index.html.erb</p>
+<%= form_with model: ToolCategory do |f| %>
+  <table>
+    <tr><th></th>
+      <th>Tool </th>
+      <th>Category </th>
+    </tr>
+    <% @tool_category_list&.each do |tool| %>
+      <tr>
+        <td><input type="checkbox" id=<%= tool&.id %> name=<%= tool&.tool_id %> value=<%= tool&.id %>>
+        </td>
+        <% if tool.category.nil?  %>
+          <td><%= tool.tool.name %></td>
+          <td></td>
+
+      <% else %>
+
+          <td><%= tool.tool.name %></td>
+          <td><%= tool.category.name %></td>
+
+
+      <% end %>
+      </tr>
+
+    <% end %>
+  </table>
+  <%= f.submit "Delete Tool's category" %>
+<% end %>
